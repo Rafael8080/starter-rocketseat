@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Curso Javascript</title>
+
+        <style>
+            #app{
+                width: 80%;
+                margin: 0 auto;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <div id="app">
+           
+        </div>
+
+        <script>
+
+            // Primeiro exercicio e segundo exercicio
+
+            // Onde eu vou adicionar o elemento criado ao html
+            var app = document.querySelector('#app');
+
+            // Criando elemento
+            var btn = document.createElement('button');
+
+            // Texto do elemento
+            var textNode = document.createTextNode('Acessar');
+            // Adicionando texto ao botão
+            btn.appendChild(textNode);
+
+            // Adicionando elemento criado a arvore do dom
+            app.appendChild(btn);
+
+
+            function getRandomColor() {
+
+                var letters = "0123456789ABCDEF";
+                var color = "#";
+
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+
+                return color;
+            }
+                var newColor = getRandomColor(); // #E943F0
+
+            btn.onclick = () => {
+
+                var quadrado = document.createElement('div');
+                quadrado.style.width = 100;
+                quadrado.style.height = 100;
+                quadrado.style.backgroundColor = '#f00';
+                app.appendChild(quadrado);
+
+
+                quadrado.onmouseover = () => {
+
+                    quadrado.style.backgroundColor = newColor;
+
+                }
+
+            }
+
+
+
+
+
+        </script>
+
+    </body>
+</html>
