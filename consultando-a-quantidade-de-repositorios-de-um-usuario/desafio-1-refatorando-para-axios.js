@@ -5,37 +5,59 @@ var listElement = document.querySelector('#list-element');
 btn.onclick = () => {
 
     var valueUser = inputUser.value;
-
-    axios.get('https://api.github.com/users/'+valueUser+' ')
-    .then((response)=>{
-        var dataRepos = response.data.repos_url;
-        countRepos(dataRepos);
-    })
-    .catch((error)=>{
-        console.warn(error);
-    })
+    axios.get('https://api.github.com/users/' + valueUser + ' ')
+        .then((response) => {
+            var dataRepos = response.data.repos_url;
+            renderLoading();
+            countRepos(dataRepos);
+            console.log(response.status);
+        })
+        .catch((error) => {
+            renderError();
+            // console.warn(error);
+        })
 }
 
-function countRepos(data){
+function countRepos(data) {
 
     axios.get(data)
-    .then((res)=>{
-        var data = res.data;
-        console.log(res.data);
-        renderListRepos(data);
-        
-    })
-    .catch((err)=>{
-        console.warn(err);
-    })
+        .then((res) => {
+            var datas = res.data;
+            renderListRepos(datas);
+        })
+        .catch((err) => {
+            console.warn(error);
+        })
 
 }
 
-function renderListRepos(datas){
+function renderError(){
 
-    for(data of datas){
+    listElement.innerHTML = "";
+    var liError = document.createElement('li');
+    var liErrorText = document.createTextNode('Usuario não encontrado');
+
+    liError.appendChild(liErrorText);
+    listElement.appendChild(liError);
+
+}
+
+function renderLoading() {
+    listElement.innerHTML = "";
+    var liLoading = document.createElement('li');
+    var liLoadingText = document.createTextNode('Carregando...');
+
+    liLoading.appendChild(liLoadingText);
+    listElement.appendChild(liLoading);
+}
+
+function renderListRepos(datas) {
+
+    listElement.innerHTML = "";
+
+    for (data of datas) {
         var li = document.createElement('li');
-        var liText = document.createTextNode('Repos'+((datas.indexOf(data)) + 1 )+'');
+        var liText = document.createTextNode('Repos' + ((datas.indexOf(data)) + 1) + '');
         li.appendChild(liText);
         listElement.appendChild(li);
     }
