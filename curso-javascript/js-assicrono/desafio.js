@@ -1,4 +1,3 @@
-
 function checarIdade(idade) {
     return new Promise((resolve, reject) => {
 

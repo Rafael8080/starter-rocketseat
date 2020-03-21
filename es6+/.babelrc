@@ -1,0 +1,4 @@
+{
+    //Converte as features do es6 para javascript para o ambiente em que está sendo executado
+    "presets": ["@babel/preset-env"]
+}
